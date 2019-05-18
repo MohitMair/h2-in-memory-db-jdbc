@@ -9,8 +9,8 @@ public class H2 {
 
         try {
 
-            //Create a database in memory and open connection
-            Connection h2DBConnection = getDBConnection();
+            //Create in-memory database and open connection
+            Connection h2DBConnection = getDBConnection("Test_DB");
 
             //Initialize Statement
             Statement h2BDStatement = h2DBConnection.createStatement();
@@ -38,13 +38,13 @@ public class H2 {
     }
 
     //Make a connection to the H2 Database
-    private static Connection getDBConnection() {
+    private static Connection getDBConnection(String DBName) {
 
         Connection conn;
 
         try {
             Class.forName("org.h2.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:h2:mem:test");
+            conn = DriverManager.getConnection("jdbc:h2:mem:"+DBName);
 
         } catch (Exception e) {
 
