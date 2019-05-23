@@ -12,18 +12,22 @@ public class Main {
         try {
 
             //Create in-memory database and open connection
-            Connection h2DBConnection = H2Factory.createH2Database("My_DB", "", "");
+            Connection h2DBConnection = H2Factory.createH2Database("/Users/mohmair/Documents/GitHub/H2", "My_DB", "", "");
 
             //Initialize Statement
             Statement h2BDStatement = h2DBConnection.createStatement();
 
             //Create a table
-            h2BDStatement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMERS (ID INT NOT NULL, NAME VARCHAR (20) NOT NULL)");
+            //h2BDStatement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMERS (ID INT NOT NULL, NAME VARCHAR (20) NOT NULL)");
+
+            h2BDStatement.executeUpdate("CREATE TABLE DRM_MAPPINGS AS SELECT * FROM CSVREAD('DRM_MP09.20190325')");
+
+
 
             //Insert some records
-            h2BDStatement.executeUpdate("insert into CUSTOMERS values(1,'MOHIT')");
-            h2BDStatement.executeUpdate("insert into CUSTOMERS values(1,'MOHIT')");
-            h2BDStatement.executeUpdate("insert into CUSTOMERS values(1,'MOHIT')");
+            //h2BDStatement.executeUpdate("insert into CUSTOMERS values(1,'MOHIT')");
+            //h2BDStatement.executeUpdate("insert into CUSTOMERS values(1,'MOHIT')");
+            //h2BDStatement.executeUpdate("insert into CUSTOMERS values(1,'MOHIT')");
 
             //Get recordset
             ResultSet h2DBResultset = h2BDStatement.executeQuery("Select count(*) as COUNT from CUSTOMERS");
